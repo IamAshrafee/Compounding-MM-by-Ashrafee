@@ -1,0 +1,158 @@
+/* Reset default margin, padding, and box-sizing for all elements */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "inter", sans-serif;
+}
+
+/* Set background color for the body */
+body {
+    background-color: #fcfcfc;
+}
+
+/* Remove outline and border for input and select elements */
+input, select {
+    outline: none;
+    border: none;
+}
+
+/* Remove spin buttons from number input fields */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Style for option elements */
+option {
+    text-align: center;
+    padding: 2px 6px 2px 4px;
+}
+
+/* Theme color styles */
+.theme-color, .red, .loss {
+    background-color: #2b2424;
+    color: white;
+}
+
+.red, .loss {
+    background-color: #ff0000;
+}
+
+.green, .win {
+    background-color: #00ff00;
+    color: black;
+}
+
+/* Flexbox container for content */
+.content {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+/* Flexbox container for left items */
+.left-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Header section styles */
+header {
+    text-align: center;
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Section input box styles */
+.section, #section-resultbox, #section-information {
+    width: max-content;
+}
+
+.section h1, #section-resultbox h1, #section-information h1 {
+    text-align: center;
+    font-size: 24px;
+    margin: 5px 0;
+}
+
+/* Styles for items container */
+.items {
+    width: 285px;
+    padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Styles for individual item */
+.item {
+    display: flex;
+    justify-content: space-between;
+    margin: 2px 0;
+}
+
+/* Styles for left part of item */
+.item-left, .item-right {
+    text-align: center;
+    border: 1px solid #000;
+    padding: 3px 0;
+    border-radius: 2px;
+}
+
+.item-left {
+    width: 150px;
+}
+
+.item-right {
+    width: 100px;
+}
+
+/* Flexbox container for sheet box and row */
+.sheet-box, .sheet-row {
+    display: flex;
+    flex-direction: column;
+}
+
+.sheet-row {
+    flex-direction: row;
+}
+
+/* Column width styles */
+.column-1 {
+    width: 60px;
+}
+
+.column-2 {
+    width: 90px;
+}
+
+.column-3 {
+    width: 130px;
+}
+
+.column-4 {
+    width: 110px;
+}
+
+/* Header styles */
+.header {
+    background-color: #2b2424;
+    color: white;
+    border: 1px solid rgb(99, 96, 96) !important;
+}
+
+/* Styles for sheet columns */
+.sheet-column {
+    border: 1px solid #000;
+    padding: 3px 0;
+    text-align: center;
+}
+
+/* Styles for input elements inside sheet columns */
+.sheet-column input {
+    text-align: center;
+    width: 100%;
+}

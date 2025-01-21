@@ -1,0 +1,223 @@
+<!-- This is a Compounding Money Management Sheet for binary trading. -->
+
+<!-- Money Management is a crucial part of trading. -->
+<!-- It is a strategy that helps traders manage their money effectively. -->
+<!-- The compounding strategy involves reinvesting profits to increase the trade amount. -->
+<!-- For example, if you start with $5000 and trade $500 per trade, and win with an 80% return, -->
+<!-- your next trade amount will be $900 (initial $500 + $400 profit). -->
+<!-- The number of compounding steps determines how many times you reinvest your profits. -->
+<!-- If you lose a trade, you revert to your base amount. -->
+
+<!-- This sheet requires inputs such as initial capital, trade amount, number of compounding steps, and broker's return percentage. -->
+<!-- The table tracks your trades, show</div>ing the trade number, result, trade amount, and return. -->
+<!-- Based on your input, the sheet calculates the next trade amount and updates the results accordingly. -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,</div>700italic,800italic,900italic"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Compounding Money Management</title>
+  </head>
+  <body>
+    <header>
+      <h1>Compounding Money Management</h1>
+      <p>Coded by Ashrafee</p>
+    </header>
+    <div class="content">
+      <div class="left-items">
+        <!-- Section for input boxes -->
+        <div class="section" id="inputbox">
+          <h1>Calculations</h1>
+          <div class="calculation items">
+            <div class="item">
+              <!-- Input for initial capital -->
+              <p class="item-left initial-capital theme-color">
+                Initial Capital
+              </p>
+              <p>:</p>
+              <input
+                type="number"
+                id="initial-capital"
+                class="item-right theme-color"
+              />
+            </div>
+            <div class="item">
+              <!-- Input for trade amount -->
+              <p class="item-left trade-amount theme-color">Trade Amount</p>
+              <p>:</p>
+              <input
+                type="number"
+                id="trade-amount"
+                class="item-right theme-color"
+              />
+            </div>
+            <div class="item">
+              <!-- Display for profit from all winning trades -->
+              <p class="item-left trade-profit green">Profit</p>
+              <p>:</p>
+              <input
+                type="number"
+                id="trade-profit"
+                class="item-right green"
+                readonly
+                value=""
+              />
+            </div>
+
+            <div class="item">
+              <!-- Display for loss from all losing trades -->
+              <p class="item-left trade-loss red">Loss</p>
+              <p>:</p>
+              <input
+                type="number"
+                id="trade-loss"
+                class="item-right red"
+                readonly
+                value=""
+              />
+            </div>
+            <div class="item">
+              <!-- Display for total result (profit or loss) -->
+              <p class="item-left total-loss-profit green">Result</p>
+              <p>:</p>
+              <input
+                type="number"
+                id="total-loss-profit"
+                class="item-right green"
+                readonly
+                value=""
+              />
+            </div>
+          </div>
+        </div>
+        <!-- Section for results -->
+        <div id="resultbox" class="section">
+          <h1>Results</h1>
+          <div class="result items">
+            <div class="item">
+              <!-- Display for final capital (initial capital + result) -->
+              <p class="item-left final-capital green">Final Capital</p>
+              <p>:</p>
+              <input
+                type="number"
+                id="final-capital"
+                class="item-right green"
+                value=""
+                readonly
+              />
+            </div>
+            <div class="item">
+              <!-- Display for total number of winning trades -->
+              <p class="item-left total-win green">Total Win</p>
+              <p>:</p>
+              <input
+                type="number"
+                id="total-win"
+                class="item-right green"
+                readonly
+                value=""
+              />
+            </div>
+            <div class="item">
+              <!-- Display for total number of losing trades -->
+              <p class="item-left total-win red">Total Loss</p>
+              <p>:</p>
+              <input
+                type="number"
+                id="total-Loss"
+                class="item-right red"
+                readonly
+                value=""
+              />
+            </div>
+            <div class="item">
+              <!-- Display for total number of trades -->
+              <p class="item-left total-trades theme-color">Total Trades</p>
+              <p>:</p>
+              <input
+                type="number"
+                id="total-trades"
+                class="item-right theme-color"
+                readonly
+                value=""
+              />
+            </div>
+          </div>
+        </div>
+        <!-- Section for additional information input -->
+        <div class="section" id="informationbox">
+          <h1>Information Input</h1>
+          <div class="information items">
+            <div class="item">
+              <!-- Input for number of compounding steps -->
+              <p class="item-left number-of-step theme-color">Number of Step</p>
+              <p>:</p>
+              <input
+                type="number"
+                id="step-number"
+                class="item-right theme-color"
+                value=""
+              />
+            </div>
+            <div class="item">
+              <!-- Input for broker's return percentage -->
+              <p class="item-left broker-return theme-color">Broker's Return</p>
+              <p>:</p>
+              <input
+                type="text"
+                id="broker-return"
+                class="item-right theme-color"
+                value="%"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="right-items">
+        <!-- Main section for the trading sheet -->
+        <div id="sheet">
+          <div class="sheet-box">
+            <!-- Header row for the table -->
+            <div class="sheet-row sheet-row-header">
+              <div class="sheet-column column-1 header"><p>N</p></div>
+              <div class="sheet-column column-2 header"><p>Result</p></div>
+              <div class="sheet-column column-3 header head3">
+                <p>Trade Amount</p>
+              </div>
+              <div class="sheet-column column-4 header"><p>Return</p></div>
+            </div>
+            <!-- General row for inputting trade results -->
+            <!-- this is the row that will be repeated for each trade, first it will tell you how amount you have to trade now and you will input the result of the trade and it will calculate the return and the next trade amount automatically generate into new row. -->
+            <div class="sheet-row">
+              <div class="sheet-column column-1">
+                <p class="trade-number">1</p>
+              </div>
+              <div class="sheet-column column-2 result">
+                <select name="??" id="win-loss">
+                  <option value="default">???</option>
+                  <option value="win" class="win">Win</option>
+                  <option value="loss" class="loss">Loss</option>
+                </select>
+              </div>
+              <div class="sheet-column column-3">
+                <!-- Display for trade amount -->
+                <p class="tradeamount"></p>
+              </div>
+              <div class="sheet-column column-4">
+                <!-- Display for trade return -->
+                <p class="trade-return"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./app.js"></script>
+  </body>
+</html>
