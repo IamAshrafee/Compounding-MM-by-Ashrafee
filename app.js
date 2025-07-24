@@ -168,7 +168,6 @@ function initializeSheet() {
 initialCapitalInput.addEventListener("change", initializeSheet);
 tradeAmountInput.addEventListener("change", initializeSheet);
 brokerReturnInput.addEventListener("change", initializeSheet);
-stepNumberInput.addEventListener("change", initializeSheet);
 
 // Add tooltips for better UX
 document
