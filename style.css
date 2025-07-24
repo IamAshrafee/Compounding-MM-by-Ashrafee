@@ -156,3 +156,12 @@ header {
     text-align: center;
     width: 100%;
 }
+
+/* Styles for win/loss rows */
+.win-row {
+    background-color: #c8e6c9; /* Light green */
+}
+
+.loss-row {
+    background-color: #ffcdd2; /* Light red */
+}

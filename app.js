@@ -9,6 +9,7 @@ const totalWinInput = document.getElementById("total-win");
 const totalLossInput = document.getElementById("total-Loss");
 const totalTradesInput = document.getElementById("total-trades");
 const brokerReturnInput = document.getElementById("broker-return");
+const stepNumberInput = document.getElementById("step-number");
 const sheetBox = document.querySelector(".sheet-box");
 
 // Initialize global variables
@@ -18,6 +19,7 @@ let profit = 0;
 let loss = 0;
 let baseTradeAmount = 0;
 let capital = 0;
+let consecutiveWins = 0;
 
 // Utility function to update values dynamically with animation
 function updateValueWithAnimation(inputElement, value) {
@@ -88,9 +90,13 @@ function addTradeRow(tradeNumber, tradeAmount) {
   // Handle result selection
   resultSelect.addEventListener("change", () => {
     const resultType = resultSelect.value;
-    const brokerReturnPercentage = parseFloat(brokerReturnInput.value) / 100 || 0;
+    const brokerReturnPercentage =
+      parseFloat(brokerReturnInput.value) / 100 || 0;
+    const numberOfSteps = parseInt(stepNumberInput.value) || Infinity;
 
     if (resultType === "win") {
+      consecutiveWins++;
+      row.classList.add("win-row"); // Add win-row class
       const returnValue = tradeAmount * brokerReturnPercentage;
       returnAmount.textContent = returnValue.toFixed(2);
 
@@ -99,9 +105,15 @@ function addTradeRow(tradeNumber, tradeAmount) {
       capital += tradeAmount + returnValue;
 
       // Calculate next trade amount for win
-      const nextTradeAmount = tradeAmount + returnValue;
+      let nextTradeAmount = tradeAmount + returnValue;
+      if (consecutiveWins >= numberOfSteps) {
+        nextTradeAmount = baseTradeAmount;
+        consecutiveWins = 0; // Reset consecutive wins
+      }
       addTradeRow(tradeNumber + 1, nextTradeAmount);
     } else if (resultType === "loss") {
+      consecutiveWins = 0;
+      row.classList.add("loss-row"); // Add loss-row class
       returnAmount.textContent = `-${tradeAmount.toFixed(2)}`;
 
       loss -= tradeAmount; // Subtract from loss
@@ -123,8 +135,15 @@ function initializeSheet() {
   totalLoss = 0;
   profit = 0;
   loss = 0;
+  consecutiveWins = 0;
   capital = parseFloat(initialCapitalInput.value) || 0;
   baseTradeAmount = parseFloat(tradeAmountInput.value) || 0;
+
+  // Error handling for invalid inputs
+  if (isNaN(capital) || isNaN(baseTradeAmount)) {
+    alert("Please enter valid numbers for Initial Capital and Trade Amount.");
+    return;
+  }
 
   // Clear previous rows
   sheetBox.innerHTML = `
@@ -149,3 +168,18 @@ function initializeSheet() {
 initialCapitalInput.addEventListener("change", initializeSheet);
 tradeAmountInput.addEventListener("change", initializeSheet);
 brokerReturnInput.addEventListener("change", initializeSheet);
+stepNumberInput.addEventListener("change", initializeSheet);
+
+// Add tooltips for better UX
+document
+  .getElementById("step-number")
+  .setAttribute(
+    "title",
+    "The number of trades in a compounding cycle."
+  );
+document
+  .getElementById("broker-return")
+  .setAttribute(
+    "title",
+    "The percentage of profit you get from your broker for a winning trade."
+  );
