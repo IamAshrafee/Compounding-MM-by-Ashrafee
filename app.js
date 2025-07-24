@@ -11,6 +11,8 @@ const totalTradesInput = document.getElementById("total-trades");
 const brokerReturnInput = document.getElementById("broker-return");
 const stepNumberInput = document.getElementById("step-number");
 const sheetBox = document.querySelector(".sheet-box");
+const fullResetButton = document.getElementById("full-reset-button");
+const resetListButton = document.getElementById("reset-list-button");
 
 // Initialize global variables
 let totalWin = 0;
@@ -164,10 +166,29 @@ function initializeSheet() {
   updateResults();
 }
 
-// Event listeners for initializing the sheet
+// Full reset function
+function fullReset() {
+  if (confirm("Are you sure you want to perform a full reset? All data will be lost.")) {
+    initialCapitalInput.value = "";
+    tradeAmountInput.value = "";
+    brokerReturnInput.value = "%";
+    stepNumberInput.value = "";
+    resetList();
+  }
+}
+
+// Reset list function
+function resetList() {
+  if (confirm("Are you sure you want to reset the trade list?")) {
+    initializeSheet();
+  }
+}
+
+// Event listeners
 initialCapitalInput.addEventListener("change", initializeSheet);
 tradeAmountInput.addEventListener("change", initializeSheet);
-brokerReturnInput.addEventListener("change", initializeSheet);
+fullResetButton.addEventListener("click", fullReset);
+resetListButton.addEventListener("click", resetList);
 
 // Add tooltips for better UX
 document

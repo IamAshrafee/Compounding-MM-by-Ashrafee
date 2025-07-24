@@ -165,3 +165,32 @@ header {
 .loss-row {
     background-color: #ffcdd2; /* Light red */
 }
+
+/* Styles for action buttons */
+
+.actions {
+    display: flex;
+    flex-direction: row;
+}
+
+.action-button {
+    background-color: #4caf50; /* Green */
+    border: none;
+    color: white;
+    padding: 8px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+    width: 100%;
+}
+
+#full-reset-button {
+    background-color: #4e0700; /* Red */
+}
+
+#reset-list-button {
+    background-color: #423800; /* Orange */
+}
